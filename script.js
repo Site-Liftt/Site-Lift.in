@@ -66,6 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   };
 
+  /* 🔥 NEW FUNCTION */
+  const setActiveNavLink = (targetId) => {
+    navLinks.forEach((navLink) => {
+      navLink.classList.toggle("active-link", navLink.getAttribute("href") === targetId);
+    });
+  };
+
   updateHeader();
   updateProgress();
 
@@ -81,10 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
+  /* 🔥 UPDATED NAV CLICK */
   navLinks.forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", () => {
+      const targetId = link.getAttribute("href");
+      setActiveNavLink(targetId);
+      closeMenu();
+    });
   });
 
+  /* 🔥 UPDATED SCROLL */
   smoothLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       const targetId = link.getAttribute("href");
@@ -95,10 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       event.preventDefault();
       const offset = (header?.offsetHeight || 0) - 4;
-      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      const targetTop =
+        targetId === "#top"
+          ? 0
+          : target.getBoundingClientRect().top + window.pageYOffset - offset;
 
       window.scrollTo({
-        top: targetTop,
+        top: targetTop < 0 ? 0 : targetTop,
         behavior: prefersReducedMotion ? "auto" : "smooth"
       });
     });
@@ -157,4 +174,3 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.key === "Escape") closeMenu();
   });
 });
-    
