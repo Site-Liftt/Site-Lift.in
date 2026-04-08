@@ -342,6 +342,32 @@ html[data-theme="dark"] .nav {
   color: var(--text);
   transform: translateY(-1px);
 }
+.nav a.active-link {
+  color: var(--text);
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.22),
+    0 0 18px rgba(34, 197, 94, 0.22),
+    inset 0 0 16px rgba(34, 197, 94, 0.08);
+}
+
+.nav a.active-link:not(.nav-cta) {
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.nav a.nav-cta.active-link {
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.18),
+    0 0 22px rgba(34, 197, 94, 0.3),
+    var(--shadow-sm);
+}
+
+html[data-theme="dark"] .nav a.active-link {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .nav a.active-link:not(.nav-cta) {
+  background: rgba(34, 197, 94, 0.18);
+}
 
 .nav-cta {
   color: #ffffff !important;
